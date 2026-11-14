@@ -44,7 +44,7 @@ ml-eval-toolkit/
 
 ```bash
 # 저장소 클론 및 개발 모드 설치
-git clone https://github.com/<your-username>/ml-eval-toolkit.git
+git clone https://github.com/<yseonghwan>/ml-eval-toolkit.git
 cd ml-eval-toolkit
 pip install -e ".[dev]"
 ```
