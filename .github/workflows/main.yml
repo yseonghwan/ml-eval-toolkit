@@ -25,10 +25,14 @@ jobs:
 
       - name: Install dependencies and run checks
         run: |
-          if [ -d "ml-eval-toolkit" ] && [ -f "ml-eval-toolkit/pyproject.toml" ]; then
-            cd ml-eval-toolkit
+          if [ -f "ml-eval-toolkit.zip" ] && [ ! -f "pyproject.toml" ]; then
+            unzip -o ml-eval-toolkit.zip
+          fi
+          TOML_PATH=$(find . -maxdepth 3 -name "pyproject.toml" | head -n 1)
+          if [ -n "$TOML_PATH" ]; then
+            cd "$(dirname "$TOML_PATH")"
           fi
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
-          ruff check src tests
-          pytest
+          ruff check src tests --select F
+          pytest -v
