@@ -8,7 +8,7 @@
 
 ## 1. 해결하려는 문제 (Problem Definition)
 
-1. **CNN 입력 정규화 누락 및 계층별 죽은 채널(Dead Channel) 추적**
+1. **CNN 입력 정규화 누락 및 계층별 죽은 채널 추적**
    - 합성곱 신경망(`Conv2D` 32채널 → `MaxPooling2D` → `Conv2D` 64채널) 학습 시 입력 스케일링(`/ 255.0`)이 누락되거나 특정 계층에서 활성화 값이 소실되어도 단순 손실(Loss) 값만으로는 원인을 특정하기 어렵습니다.
    - 또한 TensorFlow/Keras에서 연산 결정성(`enable_op_determinism`) 활성화 시 `MaxPooling2D`의 XLA 구현 한계로 런타임 에러가 발생하므로, `jit_compile=False` 설정과 계층별 활성화 통계 추출을 모듈화했습니다.
 2. **K-Means 유클리드 거리 왜곡 제어 및 최적 K값 자동 검증**
